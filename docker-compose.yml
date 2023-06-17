@@ -1,0 +1,44 @@
+version: '3'
+services:
+  db:
+    image: mariadb
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: develop
+      MYSQL_USER: junseok
+      MYSQL_PASSWORD: 1234qwer
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+  rabbitmq:
+    image: rabbitmq:3-management
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: junseok
+      RABBITMQ_DEFAULT_PASS: 1234qwer
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://db:3306/develop
+      SPRING_DATASOURCE_USERNAME: junseok
+      SPRING_DATASOURCE_PASSWORD: 1234qwer
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: junseok
+      SPRING_RABBITMQ_PASSWORD: 1234qwer
+    depends_on:
+      - db
+      - rabbitmq
+    ports:
+      - "8080:8080"
+volumes:
+  db_data:
