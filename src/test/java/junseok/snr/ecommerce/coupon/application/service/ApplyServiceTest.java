@@ -6,6 +6,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -24,5 +29,31 @@ class ApplyServiceTest {
         final long count = couponRepository.count();
 
         assertThat(count).isEqualTo(1L);
+    }
+
+    @DisplayName("100장만 발급가능한 쿠폰이 100장 보다 더 많이 발급되어야 한다")
+    @Test
+    void apply_multiple_times_test() throws InterruptedException {
+        int threadCount = 1_000;
+        final ExecutorService executorService = Executors.newFixedThreadPool(32);
+        final CountDownLatch countDownLatch = new CountDownLatch(threadCount);
+
+
+        for (int i = 0; i < threadCount; i++) {
+            long userId = i;
+            executorService.submit(() -> {
+                try {
+                    applyService.apply(userId);
+                } finally {
+                    countDownLatch.countDown();
+                }
+
+            });
+        }
+
+        countDownLatch.await();
+
+        final long count = couponRepository.count();
+        assertThat(count).isGreaterThan(100);
     }
 }
