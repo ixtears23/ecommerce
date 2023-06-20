@@ -8,7 +8,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MariaDBDialect
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
       dialect: org.hibernate.dialect.MariaDBDialect
       connection:
         provider_disables_autocommit: true
