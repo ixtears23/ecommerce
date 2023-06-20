@@ -4,9 +4,10 @@ spring:
     username: junseok
     password: 1234qwer
   jpa:
+    hibernate:
+      ddl-auto: create
     properties:
       hibernate:
         ddl-auto: create
-        format_sql: true
-        show_sql: true
-        dialect: org.hibernate.dialect.H2Dialect
+#        show_sql: true
+        dialect: org.hibernate.dialect.MariaDBDialect
