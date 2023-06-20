@@ -1,6 +1,7 @@
 version: '3'
 services:
   db:
+    container_name: ecommerce-mariadb
     image: mariadb
     restart: always
     command: --default-authentication-plugin=mysql_native_password
@@ -14,6 +15,7 @@ services:
     volumes:
       - db_data:/var/lib/mysql
   redis:
+    container_name: ecommerce-redis
     image: redis
     restart: always
     ports:
