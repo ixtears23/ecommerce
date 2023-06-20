@@ -13,7 +13,7 @@ public class ApplyService {
     }
 
     public void apply(Long userId) {
-        final int count = couponRepository.hashCode();
+        final long count = couponRepository.count();
 
         if (count > 100) return;
 
