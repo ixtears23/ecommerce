@@ -57,7 +57,6 @@ class ApplyRedisServiceTest {
         countDownLatch.await();
         executorService.shutdown();
 
-
         final long count = couponRepository.count();
         assertThat(count).isEqualTo(100);
     }

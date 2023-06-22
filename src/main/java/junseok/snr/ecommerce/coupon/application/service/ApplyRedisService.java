@@ -19,6 +19,7 @@ public class ApplyRedisService {
         this.couponCountRepository = couponCountRepository;
     }
 
+    @Transactional
     public void apply(Long userId) {
         final long count = couponCountRepository.increment();
         log.info("redis coupon count : {}", count);
