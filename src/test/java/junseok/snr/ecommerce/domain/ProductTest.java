@@ -1,6 +1,6 @@
 package junseok.snr.ecommerce.domain;
 
-import junseok.snr.ecommerce.order.domain.Product;
+import junseok.snr.ecommerce.order.domain.model.Product;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;

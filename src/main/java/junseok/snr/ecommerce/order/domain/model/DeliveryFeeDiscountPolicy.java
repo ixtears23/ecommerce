@@ -1,4 +1,4 @@
-package junseok.snr.ecommerce.order.domain;
+package junseok.snr.ecommerce.order.domain.model;
 
 import org.springframework.stereotype.Component;
 

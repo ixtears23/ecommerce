@@ -1,4 +1,4 @@
-package junseok.snr.ecommerce.order.domain;
+package junseok.snr.ecommerce.order.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
