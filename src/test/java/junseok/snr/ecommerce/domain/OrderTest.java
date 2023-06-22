@@ -1,5 +1,9 @@
 package junseok.snr.ecommerce.domain;
 
+import junseok.snr.ecommerce.order.domain.Order;
+import junseok.snr.ecommerce.order.domain.OrderItem;
+import junseok.snr.ecommerce.order.domain.OrderStatus;
+import junseok.snr.ecommerce.order.domain.Product;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

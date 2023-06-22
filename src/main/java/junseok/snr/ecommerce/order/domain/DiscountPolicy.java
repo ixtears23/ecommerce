@@ -1,4 +1,4 @@
-package junseok.snr.ecommerce.domain;
+package junseok.snr.ecommerce.order.domain;
 
 public interface DiscountPolicy {
     int apply(int orderAmount);
