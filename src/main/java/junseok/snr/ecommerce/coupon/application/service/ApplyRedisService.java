@@ -3,14 +3,13 @@ package junseok.snr.ecommerce.coupon.application.service;
 import junseok.snr.ecommerce.coupon.domain.model.Coupon;
 import junseok.snr.ecommerce.coupon.domain.repository.CouponCountRepository;
 import junseok.snr.ecommerce.coupon.domain.repository.CouponRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 public class ApplyRedisService {
-    private final Logger log = LoggerFactory.getLogger(ApplyRedisService.class);
     private final CouponRepository couponRepository;
     private final CouponCountRepository couponCountRepository;
 
