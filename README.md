@@ -6,7 +6,10 @@
 
 ### Topic 생성
 ~~~shell
-docker exec -it ecommerce-kafka kafka-topics.sh --bootstrap-server localhost:9092 --create --topic testTopic 
+docker exec -it ecommerce-kafka kafka-topics.sh --bootstrap-server localhost:9092 --create --topic testTopic
+~~~
+~~~shell
+docker exec -it ecommerce-kafka kafka-topics.sh --bootstrap-server localhost:9092 --create --topic coupon_create
 ~~~
 
 ### Producer
@@ -17,4 +20,7 @@ docker exec -it ecommerce-kafka kafka-console-producer.sh --topic testTopic --br
 ### Consumer
 ~~~shell
 docker exec -it ecommerce-kafka kafka-console-consumer.sh --topic testTopic --bootstrap-server localhost:9092
+~~~
+~~~shell
+docker exec -it ecommerce-kafka kafka-console-consumer.sh --topic coupon_create --bootstrap-server localhost:9092 --key-deserializer "org.apache.kafka.common.serialization.StringDeserializer" --value-deserializer "org.apache.kafka.common.serialization.LongDeserializer"
 ~~~
