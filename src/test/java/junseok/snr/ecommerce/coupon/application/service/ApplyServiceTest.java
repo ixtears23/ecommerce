@@ -2,6 +2,7 @@ package junseok.snr.ecommerce.coupon.application.service;
 
 import junseok.snr.ecommerce.coupon.domain.repository.CouponRepository;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 class ApplyServiceTest {
-
     @Autowired
     private ApplyService applyService;
     @Autowired
     private CouponRepository couponRepository;
+
+    @BeforeEach
+    void setUp() {
+        couponRepository.deleteAll();
+    }
+
 
     @DisplayName("쿠폰을 딱 한번 생성했을 때 쿠폰 조회 시 쿠폰 갯수는 1개여야 한다")
     @Test
@@ -45,7 +51,6 @@ class ApplyServiceTest {
         assertThat(count).isGreaterThan(100);
     }
 
-
     private long countApply(String flag) throws InterruptedException {
         int threadCount = 1_000;
         final ExecutorService executorService = Executors.newFixedThreadPool(32);
@@ -55,7 +60,11 @@ class ApplyServiceTest {
             long userId = i;
             executorService.submit(() -> {
                 try {
-                    apply(flag, userId);
+                    if ("sync".equals(flag)) {
+                        applyService.applySync(userId);
+                    } else {
+                        applyService.applyNoneSync(userId);
+                    }
                 } finally {
                     countDownLatch.countDown();
                 }
@@ -65,19 +74,6 @@ class ApplyServiceTest {
 
         countDownLatch.await();
         return couponRepository.count();
-    }
-
-    private void apply(String flag, long userId) {
-        if ("sync".equals(flag)) {
-            applyService.applySync(userId);
-        } else {
-            applyService.applyNoneSync(userId);
-        }
-    }
-
-    @AfterEach
-    void tearDown() {
-        couponRepository.deleteAll();
     }
 
 }

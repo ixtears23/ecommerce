@@ -1,0 +1,25 @@
+= eCommerce Application Rest Docs
+
+.curl-request
+include::{snippets}/issue-coupon/curl-request.adoc[]
+
+.http-request
+include::{snippets}/issue-coupon/http-request.adoc[]
+
+.http-response
+include::{snippets}/issue-coupon/http-response.adoc[]
+
+.httpie-request
+include::{snippets}/issue-coupon/httpie-request.adoc[]
+
+.request-body
+include::{snippets}/issue-coupon/request-body.adoc[]
+
+.request-fields
+include::{snippets}/issue-coupon/request-fields.adoc[]
+
+.response-body
+include::{snippets}/issue-coupon/response-body.adoc[]
+
+
+As you can see the format is very simple, and in fact you always get the same message.
