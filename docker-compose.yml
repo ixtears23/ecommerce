@@ -20,6 +20,24 @@ services:
     restart: always
     ports:
       - "6379:6379"
+  zookeeper:
+    container_name: ecommerce-zookeeper
+    image: bitnami/zookeeper:3.8.1
+    restart: always
+    ports:
+      - "2181:2181"
+    environment:
+      ALLOW_ANONYMOUS_LOGIN: yes
+  kafka:
+    container_name: ecommerce-kafka
+    image: bitnami/kafka:3.2.3
+    restart: always
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOT_NAME: 127.0.0.1
+      KAFKA_ZOOKEEPER_CONNECT: ecommerce-zookeeper:2181
+      ALLOW_PLAINTEXT_LISTENER: yes
   rabbitmq:
     image: rabbitmq:3-management
     restart: always
