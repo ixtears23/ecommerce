@@ -2,16 +2,14 @@ package junseok.snr.ecommerce.coupon.application.service;
 
 import junseok.snr.ecommerce.coupon.domain.model.Coupon;
 import junseok.snr.ecommerce.coupon.domain.repository.CouponRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@RequiredArgsConstructor
 @Service
 public class ApplyService {
     private final CouponRepository couponRepository;
-
-    public ApplyService(CouponRepository couponRepository) {
-        this.couponRepository = couponRepository;
-    }
 
     @Transactional
     public synchronized void applySync(Long userId) {

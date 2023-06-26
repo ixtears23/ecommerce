@@ -1,5 +1,6 @@
 package junseok.snr.ecommerce.coupon.application.service;
 
+import junseok.snr.ecommerce.coupon.domain.repository.CouponCountRepository;
 import junseok.snr.ecommerce.coupon.domain.repository.CouponRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,12 +20,14 @@ class ApplyKafkaServiceTest {
     private ApplyKafkaService applyKafkaService;
     @Autowired
     private CouponRepository couponRepository;
+    @Autowired
+    private CouponCountRepository couponCountRepository;
 
     @BeforeEach
     void setUp() {
         couponRepository.deleteAll();
+        couponCountRepository.deleteAll();
     }
-
 
     @DisplayName("쿠폰을 딱 한번 생성했을 때 쿠폰 조회 시 쿠폰 갯수는 1개여야 한다")
     @Test
