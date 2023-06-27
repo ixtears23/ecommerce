@@ -43,6 +43,7 @@ class ApplyKafkaServiceTest {
     @Test
     void apply_sync_multiple_times_test() throws InterruptedException {
         final long count = countApply();
+
         assertThat(count).isEqualTo(100);
     }
 
@@ -64,6 +65,9 @@ class ApplyKafkaServiceTest {
         }
 
         countDownLatch.await();
+
+        Thread.sleep(10_000);
+
         return couponRepository.count();
     }
 
