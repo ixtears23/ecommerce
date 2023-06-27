@@ -9,7 +9,8 @@ import org.springframework.stereotype.Component;
 public class CouponCreatedConsumer {
 
     @KafkaListener(topics = "coupon_create", groupId = "group_1")
-    public void listener(Long userId) {
+    public Long listener(Long userId) {
         log.info(">>>>> topic : coupon_create, userId : {}", userId);
+        return userId;
     }
 }
