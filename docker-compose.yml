@@ -28,7 +28,7 @@ services:
     ports:
       - "2181:2181"
     environment:
-      ALLOW_ANONYMOUS_LOGIN: yes
+      ALLOW_ANONYMOUS_LOGIN: "yes"
   kafka:
     container_name: ecommerce-kafka
     image: bitnami/kafka:3.2.3
@@ -42,9 +42,9 @@ services:
       KAFKA_ADVERTISED_HOST_NAME: localhost
       KAFKA_ADVERTISED_PORT: 9092
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      ALLOW_PLAINTEXT_LISTENER: yes
+      ALLOW_PLAINTEXT_LISTENER: "yes"
       KAFKA_MESSAGE_MAX_BYTES: 2000000
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: false
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
   rabbitmq:
