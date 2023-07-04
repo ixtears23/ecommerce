@@ -1,0 +1,78 @@
+version: '3'
+services:
+  db:
+    container_name: ecommerce-mariadb
+    image: mariadb
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: develop
+      MYSQL_USER: junseok
+      MYSQL_PASSWORD: 1234qwer
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+  redis:
+    container_name: ecommerce-redis
+    image: redis
+    restart: always
+    ports:
+      - "6379:6379"
+  zookeeper:
+    container_name: ecommerce-zookeeper
+    image: bitnami/zookeeper:3.8.1
+    hostname: zookeeper
+    restart: always
+    ports:
+      - "2181:2181"
+    environment:
+      ALLOW_ANONYMOUS_LOGIN: yes
+  kafka:
+    container_name: ecommerce-kafka
+    image: bitnami/kafka:3.2.3
+    restart: always
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      ALLOW_PLAINTEXT_LISTENER: yes
+      KAFKA_MESSAGE_MAX_BYTES: 2000000
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: false
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  rabbitmq:
+    image: rabbitmq:3-management
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: junseok
+      RABBITMQ_DEFAULT_PASS: 1234qwer
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://db:3306/develop
+      SPRING_DATASOURCE_USERNAME: junseok
+      SPRING_DATASOURCE_PASSWORD: 1234qwer
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: junseok
+      SPRING_RABBITMQ_PASSWORD: 1234qwer
+    depends_on:
+      - db
+      - rabbitmq
+    ports:
+      - "8080:8080"
+volumes:
+  db_data:
