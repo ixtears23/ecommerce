@@ -1,4 +1,12 @@
 # eCommerce Application
+우선, 조금씩 만들어 볼까?
+
+## 구성 요소
+- Java20
+- docker
+- kafka
+- redis
+- mariadb
 
 ---
 
