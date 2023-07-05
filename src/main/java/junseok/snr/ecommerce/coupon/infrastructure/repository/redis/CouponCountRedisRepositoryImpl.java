@@ -1,16 +1,16 @@
-package junseok.snr.ecommerce.coupon.infrastructure.repository;
+package junseok.snr.ecommerce.coupon.infrastructure.repository.redis;
 
 import junseok.snr.ecommerce.coupon.domain.repository.CouponCountRepository;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class CouponCountRepositoryImpl implements CouponCountRepository {
+public class CouponCountRedisRepositoryImpl implements CouponCountRepository {
 
     public static final String KEY = "coupon_count";
     private final RedisTemplate<String, String> redisTemplate;
 
-    public CouponCountRepositoryImpl(RedisTemplate<String, String> redisTemplate) {
+    public CouponCountRedisRepositoryImpl(RedisTemplate<String, String> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 

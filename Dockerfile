@@ -12,7 +12,11 @@ RUN chmod +x ./gradlew
 RUN ./gradlew --version
 
 COPY . .
-RUN ./gradlew clean build
+
+ENTRYPOINT ["./gradlew", "clean"]
+
+ENTRYPOINT ["./gradlew", "test"]
+
 
 EXPOSE 8080
 

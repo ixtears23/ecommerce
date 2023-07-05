@@ -4,15 +4,17 @@ spring:
     username: junseok
     password: 1234qwer
   jpa:
+    hibernate:
+      ddl-auto: create
+      connection:
+        provider_disables_autocommit: true
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MariaDBDialect
-    hibernate:
-      ddl-auto: create
-      dialect: org.hibernate.dialect.MariaDBDialect
-      connection:
-        provider_disables_autocommit: true
-#  kafka:
+        show-sql: true
+
+  kafka:
+    bootstrap-servers: localhost:9092
 #    producer:
 #      bootstrap-servers: localhost:9092
 #      key-serializer: org.apache.kafka.common.serialization.StringSerializer
