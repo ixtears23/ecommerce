@@ -74,6 +74,8 @@ services:
     depends_on:
       - db
       - rabbitmq
+      - kafka
+      - redis
     ports:
       - "8080:8080"
 volumes:

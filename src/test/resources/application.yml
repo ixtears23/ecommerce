@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mariadb://db:3307/develop
+    url: jdbc:mariadb://db:3306/develop
     username: junseok
     password: 1234qwer
   jpa:
