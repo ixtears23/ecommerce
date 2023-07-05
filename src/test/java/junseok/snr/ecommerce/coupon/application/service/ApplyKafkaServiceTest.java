@@ -2,6 +2,9 @@ package junseok.snr.ecommerce.coupon.application.service;
 
 import junseok.snr.ecommerce.coupon.domain.repository.CouponCountRepository;
 import junseok.snr.ecommerce.coupon.domain.repository.CouponRepository;
+import junseok.snr.ecommerce.coupon.infrastructure.consumer.CouponCreatedConsumer;
+import junseok.snr.ecommerce.coupon.infrastructure.repository.redis.AppliedUserRedisRepository;
+import org.apache.kafka.clients.admin.NewTopic;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,16 +25,19 @@ class ApplyKafkaServiceTest {
     private CouponRepository couponRepository;
     @Autowired
     private CouponCountRepository couponCountRepository;
+    @Autowired
+    private AppliedUserRedisRepository appliedUserRedisRepository;
 
     @BeforeEach
     void setUp() {
         couponRepository.deleteAll();
         couponCountRepository.deleteAll();
+        appliedUserRedisRepository.deleteAll("applied_user");
     }
 
     @DisplayName("쿠폰을 딱 한번 생성했을 때 쿠폰 조회 시 쿠폰 갯수는 1개여야 한다")
     @Test
-    void apply_only_once_test() {
+    void apply_only_once_test() throws InterruptedException {
         applyKafkaService.apply(1L);
 
         final long count = couponRepository.count();

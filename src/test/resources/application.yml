@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mariadb://db:3306/develop
+    url: jdbc:mariadb://localhost:3307/develop
     username: junseok
     password: 1234qwer
   jpa:
@@ -8,6 +8,6 @@ spring:
       ddl-auto: create
     properties:
       hibernate:
-        ddl-auto: create
-#        show_sql: true
         dialect: org.hibernate.dialect.MariaDBDialect
+  kafka:
+    bootstrap-servers: localhost:9092

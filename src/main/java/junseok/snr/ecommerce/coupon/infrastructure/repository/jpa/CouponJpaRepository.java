@@ -1,4 +1,4 @@
-package junseok.snr.ecommerce.coupon.infrastructure.repository;
+package junseok.snr.ecommerce.coupon.infrastructure.repository.jpa;
 
 import junseok.snr.ecommerce.coupon.domain.model.Coupon;
 import junseok.snr.ecommerce.coupon.domain.repository.CouponRepository;
