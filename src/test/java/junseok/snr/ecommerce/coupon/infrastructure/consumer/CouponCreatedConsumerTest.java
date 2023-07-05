@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @EmbeddedKafka(
         partitions = 1,
         brokerProperties = {
-                "listener=PLAINTEXT://localhost:9092",
+                "listener=PLAINTEXT://kafka:9092",
                 "port=9092"
         }
 )
