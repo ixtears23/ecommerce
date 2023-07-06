@@ -58,7 +58,10 @@ jacoco {
 
 
 test {
-    finalizedBy jacocoTestReport
+    jacoco {
+        destinationFile = layout.buildDirectory.file('jacoco/jacocoTest.exec').get().asFile
+        classDumpDir = layout.buildDirectory.dir('jacoco/classpathdumps').get().asFile
+    }
 }
 
 jacocoTestReport {
@@ -66,6 +69,6 @@ jacocoTestReport {
         xml.required = false
         csv.required = false
         html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
-}
+    }
     dependsOn test
 }
