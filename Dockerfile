@@ -15,7 +15,7 @@ COPY . .
 
 ENTRYPOINT ["./gradlew", "clean"]
 
-ENTRYPOINT ["./gradlew", "test"]
+ENTRYPOINT ["./gradlew", "jacocoTestReport"]
 
 
 EXPOSE 8080
