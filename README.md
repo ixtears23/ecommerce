@@ -1,4 +1,4 @@
-# eCommerce Application
+# web-app-sample
 
 ---
 
